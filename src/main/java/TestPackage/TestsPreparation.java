@@ -21,7 +21,7 @@ public class TestsPreparation {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().window().fullscreen();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.get("https://beru.ru");
     }
 

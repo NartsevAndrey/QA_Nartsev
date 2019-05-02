@@ -11,23 +11,29 @@ public class AuthorizationForm extends TestsPreparation {
 
     @Step("Enter login")
     public void enterLogin(String login) {
-        // вводим логин
+
         WebElement Login = (new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".passp-login-form"))))
                 .findElement(By.name("login"));
+        // вводим логин
         Login.sendKeys(login);
-        Screenshoter.makeScreenshot(driver); // делаем скриншот
+        // делаем скриншот
+        Screenshoter.makeScreenshot(driver);
+        // нажимаем ENTER
         Login.sendKeys(Keys.ENTER);
     }
 
     @Step("Enter password")
     public void enterPassword(String password) {
-        // вводим пароль
+        // ждем пока появится форма с вводом пароля
         WebElement Password = (new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".passp-password-form"))))
                 .findElement(By.name("passwd"));
+        // вводим пароль
         Password.sendKeys(password);
-        Screenshoter.makeScreenshot(driver); // делаем скриншот
+        // делаем скриншот
+        Screenshoter.makeScreenshot(driver);
+        // нажимаем ENTER
         Password.sendKeys(Keys.ENTER);
     }
 }

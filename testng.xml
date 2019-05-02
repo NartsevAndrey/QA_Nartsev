@@ -5,4 +5,9 @@
             <class name="TestPackage.Test1" />
         </classes>
     </test>
+    <test name="ChangeCity">
+        <classes>
+            <class name="TestPackage.Test2" />
+        </classes>
+    </test>
 </suite>
