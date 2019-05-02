@@ -8,8 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Screenshoter {
-
-    @Attachment(value = "{0}", type = "image/png")
+    @Attachment(value = "{1}", type = "image/png")
     public static byte[] allureScreenshot(WebDriver driver, String name) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }

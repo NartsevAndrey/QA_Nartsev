@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestSuite">
-    <test name="Login">
+    <test name="Authorization">
         <classes>
             <class name="TestPackage.Test1" />
         </classes>
