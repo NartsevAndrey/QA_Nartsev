@@ -30,4 +30,13 @@ public class TestsPreparation {
         driver.get("https://beru.ru/logout?retpath=https%3A%2F%2Fberu.ru%2F%3Fncrnd%3D169");
         driver.quit();
     }
+
+    // вспомогательная функция, оставляющая в строке только числа, и приводящая строку к целому числу
+    public int parser(String s) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < s.length(); i++)
+            if (Character.isDigit(s.charAt(i)))
+                res.append(s.charAt(i));
+        return Integer.parseInt(new String(res));
+    }
 }

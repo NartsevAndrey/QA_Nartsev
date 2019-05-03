@@ -10,4 +10,9 @@
             <class name="TestPackage.Test2" />
         </classes>
     </test>
+    <test name="CheckOrderGoods">
+        <classes>
+            <class name="TestPackage.Test3" />
+        </classes>
+    </test>
 </suite>

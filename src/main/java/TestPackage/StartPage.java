@@ -83,7 +83,9 @@ public class StartPage extends TestsPreparation {
 
     @Step("Check the city")
     public void checkCity(String city) {
+        // находим элемент, отображающий название города
         WebElement cityName = driver.findElement(By.cssSelector("[class*='__region'] [class*='link__inner']"));
+        // проверяем, что отображается верный город
         Assert.assertEquals(cityName.getAttribute("textContent"), city);
         // делаем скриншот
         Screenshoter.makeScreenshot(driver);
@@ -99,5 +101,17 @@ public class StartPage extends TestsPreparation {
         // кликаем на кнопку "Настройки"
         driver.findElement(By.cssSelector("[class*='item_type_settings']")).click();
         return new UserProfile();
+    }
+
+    @Step("Go to the desired category")
+    public GoodsListPage findItem(String s) {
+        // вводим нужный запрос в поле для поиска
+        WebElement search = driver.findElement(By.cssSelector("[class*='input__control']"));
+        search.click();
+        search.sendKeys(s);
+        // делаем скриншот
+        Screenshoter.makeScreenshot(driver);
+        search.sendKeys(Keys.ENTER);
+        return new GoodsListPage();
     }
 }
