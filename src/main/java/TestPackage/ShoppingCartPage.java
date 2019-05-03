@@ -14,8 +14,8 @@ public class ShoppingCartPage extends TestsPreparation {
     // список цен, отображаемых в корзине
     // price[0] = стоимость товаров
     // price[1] = стоимость доставки
-    // если скидка есть: price[2] = скидка, price[3] = итоговая цена
-    // если скидки нет: price[2] = итоговая цена
+    // price[2] = скидка
+    // price[3] = итоговая цена
     private List<Integer> price;
 
     @Step("Check the value of \"To get free shipping\"")
@@ -34,26 +34,28 @@ public class ShoppingCartPage extends TestsPreparation {
         // получаем список элементов, содержащих стоимости
         List<WebElement> priceList = driver.findElements(By.cssSelector("[class *= '_1Q9ASvPbPN']"));
         // получаем стоимость товаров
-        String goodsPrice =
-                priceList.get(0).findElement(By.cssSelector("[data-auto*='value']")).getAttribute("textContent");
+        String goodsPrice = priceList.get(0).findElement(
+                By.cssSelector("[data-auto*='value']")).getAttribute("textContent");
         price.add(parser(goodsPrice));
 
         // получаем стоимость доставки
-        String deliveryPrice =
-                priceList.get(1).findElement(By.cssSelector("[data-auto*='value']")).getAttribute("textContent");
+        String deliveryPrice = priceList.get(1).findElement(
+                By.cssSelector("[data-auto*='value']")).getAttribute("textContent");
         price.add(deliveryPrice.contains("бесплатно") ? 0 : parser(deliveryPrice));
         // получаем стоимость скидки (если она есть)
         if (priceList.size() == 4) {
-            String salePrice =
-                    priceList.get(2).findElement(By.xpath("//span[text()[contains(., 'Скидка')]]/following-sibling::span")).getAttribute("textContent");
+            String salePrice = priceList.get(2).findElement(
+                    By.xpath("//span[text()[contains(., 'Скидка')]]/following-sibling::span"))
+                    .getAttribute("textContent");
             price.add(parser(salePrice));
         }
         else
             // иначе скидка равна нулю
             price.add(0);
         // получаем итоговую сумму
-        String totalPrice =
-                priceList.get(priceList.size() - 1).findElement(By.cssSelector("[class*='_1oBlNqVHPq']")).getAttribute("textContent");
+        String totalPrice = priceList.get(priceList.size() - 1).findElement(
+                By.cssSelector("[class*='_1oBlNqVHPq']"))
+                .getAttribute("textContent");
         price.add(parser(totalPrice));
         // делаем скриншот
         Screenshoter.makeScreenshot(driver);
@@ -90,7 +92,8 @@ public class ShoppingCartPage extends TestsPreparation {
     public void checkDeliveryIsFree(String s) {
         // ждем, пока сменится надпись
         (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.attributeContains(By.cssSelector("[class*='_3EX9adn_xp']"), "textContent", s));
+                .until(ExpectedConditions.attributeContains(
+                        By.cssSelector("[class*='_3EX9adn_xp']"), "textContent", s));
         // проверяем, что надпись поменялась
         checkDeliveryText(s);
         // заново получаем список цен

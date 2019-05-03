@@ -39,8 +39,8 @@ public class GoodsListPage extends TestsPreparation {
         // пока это возможно, нажимаем кнопку "показать еще", чтобы отобразить все щетки
         while(true) {
             try {
-                WebElement buttonShowNewElement = driver.findElement(By.cssSelector("[class*='n-pager-more__button']"));
-                buttonShowNewElement.click();
+                WebElement buttonShowNew = driver.findElement(By.cssSelector("[class*='n-pager-more__button']"));
+                buttonShowNew.click();
             } catch (Exception e) {
                 break;
             }
@@ -51,7 +51,8 @@ public class GoodsListPage extends TestsPreparation {
                         .getAttribute("textContent").split(" ")[1]);
         // ждем, чтобы все товары прогрузились
         (new WebDriverWait(driver,30))
-                .until(driver -> driver.findElements(By.cssSelector("[class*='grid-snippet_react']")).size() == countOfGoods);
+                .until(driver ->
+                        driver.findElements(By.cssSelector("[class*='grid-snippet_react']")).size() == countOfGoods);
         // получаем список товаров
         goodsList = driver.findElements(By.cssSelector("[class*='grid-snippet_react']"));
         // проверяем, что в списке есть по крайней мере 2 товара (чтобы взять предпоследний)
