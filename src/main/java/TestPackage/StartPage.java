@@ -12,8 +12,6 @@ public class StartPage extends TestsPreparation {
 
     @Step("Click on the login button")
     public AuthorizationForm clickButtonLogin() {
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // нажимаем "войти в аккаунт"
         driver.findElement(By.cssSelector(".header2-nav__user")).click();
         return new AuthorizationForm();
@@ -24,8 +22,6 @@ public class StartPage extends TestsPreparation {
         // проверяем, что название кнопки изменилось на "Мой профиль"
         WebElement profile = driver.findElement(By.cssSelector(".header2-nav__user [class*='__text']"));
         Assert.assertEquals(profile.getAttribute("textContent"), "Мой профиль");
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Check the login")
@@ -36,14 +32,10 @@ public class StartPage extends TestsPreparation {
         // проверяем, что указан верный логин (email)
         WebElement email = driver.findElement(By.cssSelector(".header2-user-menu__email"));
         Assert.assertEquals(email.getAttribute("textContent"), "adnartsev@yandex.ru");
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Click on the change city button")
     public void clickButtonChangeCity() {
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // нажимаем кнопку с названием города
         driver.findElement(By.cssSelector("[class*='__region'] [class*='link__inner']")).click();
     }
@@ -65,7 +57,6 @@ public class StartPage extends TestsPreparation {
                 .until(ExpectedConditions.attributeContains(
                         By.cssSelector("[class*='region-suggest__list-item']"),
                         "textContent", city));
-
         // нажимаем ENTER
         cityName.sendKeys(Keys.ENTER);
 
@@ -73,8 +64,6 @@ public class StartPage extends TestsPreparation {
         (new WebDriverWait(driver, 15))
                 .until(ExpectedConditions.invisibilityOf(
                         driver.findElement(By.cssSelector("[class*='suggestick-list']"))));
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // нажимаем ENTER
         cityName.sendKeys(Keys.ENTER);
         // обновляем страницу
@@ -87,8 +76,6 @@ public class StartPage extends TestsPreparation {
         WebElement cityName = driver.findElement(By.cssSelector("[class*='__region'] [class*='link__inner']"));
         // проверяем, что отображается верный город
         Assert.assertEquals(cityName.getAttribute("textContent"), city);
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Click on the setting button")
@@ -96,8 +83,6 @@ public class StartPage extends TestsPreparation {
         // кликаем на кнопку "Мой профиль"
         WebElement profile = driver.findElement(By.cssSelector(".header2-nav__user [class*='__text']"));
         profile.click();
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // кликаем на кнопку "Настройки"
         driver.findElement(By.cssSelector("[class*='item_type_settings']")).click();
         return new UserProfile();
@@ -109,8 +94,6 @@ public class StartPage extends TestsPreparation {
         WebElement search = driver.findElement(By.cssSelector("[class*='input__control']"));
         search.click();
         search.sendKeys(s);
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         search.sendKeys(Keys.ENTER);
         return new GoodsListPage();
     }

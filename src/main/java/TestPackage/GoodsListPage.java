@@ -29,9 +29,6 @@ public class GoodsListPage extends TestsPreparation {
         priceTo.sendKeys(Integer.toString(max));
         // ждем, пока элементы будут выбраны
         (new WebDriverWait(driver, 30)).until(ExpectedConditions.visibilityOf(foundedGoods));
-
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Get a list of goods")
@@ -57,8 +54,6 @@ public class GoodsListPage extends TestsPreparation {
         goodsList = driver.findElements(By.cssSelector("[class*='grid-snippet_react']"));
         // проверяем, что в списке есть по крайней мере 2 товара (чтобы взять предпоследний)
         Assert.assertTrue(goodsList.size() > 1);
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Check that prices belong to the interval")
@@ -69,14 +64,10 @@ public class GoodsListPage extends TestsPreparation {
                     .getAttribute("textContent"));
             Assert.assertTrue(min  <= price && price <= max);
         }
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Add to Cart")
     public void addToShoppingCart() {
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // нажимаем кнопку "Добавить в корзину" для предпоследней щетки
         WebElement button = goodsList.get(goodsList.size() - 2).findElement(By.cssSelector("[class*='_2w0qPDYwej']"));
         (new WebDriverWait(driver, 30)).until(ExpectedConditions.elementToBeClickable(button));
@@ -85,16 +76,12 @@ public class GoodsListPage extends TestsPreparation {
         (new WebDriverWait(driver, 30))
                 .until(ExpectedConditions.presenceOfElementLocated(By
                         .cssSelector("[class*='_1sjxYfIabK _26mXJDBxtH']")));
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Click the shopping cart button")
     public ShoppingCartPage goToShoppingCart() {
         // нажимаем кнопку "В корзине" для предпоследней щетки
         goodsList.get(goodsList.size() - 2).findElement(By.cssSelector("[class*='_2w0qPDYwej']")).click();
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         return new ShoppingCartPage();
     }
 }

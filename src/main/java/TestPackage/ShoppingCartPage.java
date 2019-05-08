@@ -24,8 +24,6 @@ public class ShoppingCartPage extends TestsPreparation {
         WebElement text = driver.findElement(By.cssSelector("[class *= '_3EX9adn_xp']"));
         // проверяем, что текст содержит нужную подстроку
         Assert.assertTrue(text.getAttribute("textContent").contains(s));
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Get prices")
@@ -57,8 +55,6 @@ public class ShoppingCartPage extends TestsPreparation {
                 By.cssSelector("[class*='_1oBlNqVHPq']"))
                 .getAttribute("textContent");
         price.add(parser(totalPrice));
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Check that the price is calculated correctly")
@@ -67,8 +63,6 @@ public class ShoppingCartPage extends TestsPreparation {
         getPrice();
         // проверяем, что итогова цена = стоимость товаров + стоимость доставки - скидка
         Assert.assertTrue(price.get(3) == price.get(0) + price.get(1) + price.get(2));
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Increase the number of goods")
@@ -84,8 +78,6 @@ public class ShoppingCartPage extends TestsPreparation {
             currentPrice = parser(driver.findElement(By.xpath("//div[@data-auto='CartOfferPrice']/span/span/span"))
                     .getAttribute("textContent"));
         }
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 
     @Step("Check that the delivery is free")
@@ -100,7 +92,5 @@ public class ShoppingCartPage extends TestsPreparation {
         getPrice();
         // проверяем, что стоимость доставки стала равной нулю
         Assert.assertTrue(price.get(1) == 0);
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 }

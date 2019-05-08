@@ -12,7 +12,5 @@ public class UserProfile extends TestsPreparation {
         WebElement cityName = driver.findElement(By.cssSelector("[class*='__region'] [class*='link__inner']"));
         WebElement deliveryAddress = driver.findElement(By.cssSelector("[class*='__region'] [class='link__inner']"));
         Assert.assertEquals(cityName.getAttribute("textContent"), deliveryAddress.getAttribute("textContent"));
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
     }
 }

@@ -17,8 +17,6 @@ public class AuthorizationForm extends TestsPreparation {
                 .findElement(By.name("login"));
         // вводим логин
         Login.sendKeys(login);
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // нажимаем ENTER
         Login.sendKeys(Keys.ENTER);
     }
@@ -31,8 +29,6 @@ public class AuthorizationForm extends TestsPreparation {
                 .findElement(By.name("passwd"));
         // вводим пароль
         Password.sendKeys(password);
-        // делаем скриншот
-        Screenshoter.makeScreenshot(driver);
         // нажимаем ENTER
         Password.sendKeys(Keys.ENTER);
     }

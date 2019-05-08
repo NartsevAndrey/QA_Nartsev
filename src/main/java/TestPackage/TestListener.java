@@ -8,7 +8,7 @@ public class TestListener extends TestListenerAdapter {
     @Override
     public void onTestFailure(ITestResult tr) {
         WebDriver driver = TestsPreparation.getDriver();
-        Screenshoter.makeScreenshot(driver);
+        Screenshoter.makeErrorScreenshot(driver);
     }
 }
 

@@ -1,6 +1,8 @@
 package TestPackage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -27,7 +29,16 @@ public class TestsPreparation {
 
     @AfterMethod
     public void clear() {
-        driver.get("https://beru.ru/logout?retpath=https%3A%2F%2Fberu.ru%2F%3Fncrnd%3D169");
+        // вылогиниваемся
+        WebElement profile = driver.findElement(By.cssSelector(".header2-nav__user [class*='__text']"));
+        // если был выполнен вход в систему
+        if (profile.getAttribute("textContent").equals("Мой профиль")) {
+            // кликаем на кнопку "Мой профиль"
+            profile.click();
+            // кликаем на кнопку "Выход"
+            driver.findElement(By.cssSelector("[class*='item_type_logout']")).click();
+        }
+        // закрываем драйвер
         driver.quit();
     }
 
