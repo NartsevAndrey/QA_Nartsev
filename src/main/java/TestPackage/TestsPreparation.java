@@ -46,8 +46,9 @@ public class TestsPreparation {
     public int parser(String s) {
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < s.length(); i++)
-            if (Character.isDigit(s.charAt(i)))
+            if (Character.isDigit(s.charAt(i))) {
                 res.append(s.charAt(i));
+            }
         return Integer.parseInt(new String(res));
     }
 }

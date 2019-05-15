@@ -47,9 +47,10 @@ public class ShoppingCartPage extends TestsPreparation {
                     .getAttribute("textContent");
             price.add(parser(salePrice));
         }
-        else
+        else {
             // иначе скидка равна нулю
             price.add(0);
+        }
         // получаем итоговую сумму
         String totalPrice = priceList.get(priceList.size() - 1).findElement(
                 By.cssSelector("[class*='_1oBlNqVHPq']"))

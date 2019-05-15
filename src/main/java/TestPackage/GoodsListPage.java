@@ -2,6 +2,7 @@ package TestPackage;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,8 +53,8 @@ public class GoodsListPage extends TestsPreparation {
                         driver.findElements(By.cssSelector("[class*='grid-snippet_react']")).size() == countOfGoods);
         // получаем список товаров
         goodsList = driver.findElements(By.cssSelector("[class*='grid-snippet_react']"));
-        // проверяем, что в списке есть по крайней мере 2 товара (чтобы взять предпоследний)
-        Assert.assertTrue(goodsList.size() > 1);
+        // проверяем, что список не пуст
+        Assert.assertNotEquals(goodsList.size(), 0);
     }
 
     @Step("Check that prices belong to the interval")
@@ -83,5 +84,68 @@ public class GoodsListPage extends TestsPreparation {
         // нажимаем кнопку "В корзине" для предпоследней щетки
         goodsList.get(goodsList.size() - 2).findElement(By.cssSelector("[class*='_2w0qPDYwej']")).click();
         return new ShoppingCartPage();
+    }
+
+    @Step("Сhange the manufacturer")
+    public void changeManufacturer(String manufacturer) {
+        // получаем элемент, содержащий список производителей
+        WebElement manufactureres = driver.findElement(By.xpath("//div[@class='_1vMoBTNhsM']"));
+        // нажимаем на кнопку "Показать все"
+        WebElement button = driver.findElement(By.xpath("//a[contains(text(), 'Показать все')]"));
+        (new WebDriverWait(driver, 30)).until(ExpectedConditions.elementToBeClickable(button));
+        button.click();
+        // ищем нужного производителя и кликаем на нужную галочку
+        button = manufactureres.findElement(By.xpath("//input[contains(@name, '" + manufacturer + "')]/.."));
+        button.click();
+    }
+
+    @Step("Check the manufacturer")
+    public void checkManufacturer(String manufacturer) {
+        // для каждого товара из списка парсим его производителя и проверяем, что он является нужным
+        for (WebElement element : goodsList) {
+            String text = element.findElement(By.cssSelector("[class=\"_3bNl7A8hOl\"]")).getAttribute("textContent");
+            Assert.assertTrue(text.contains(manufacturer));
+        }
+    }
+
+    @Step("Сhange the sorting criteria")
+    public void changeSortingСriterion(String criteria) {
+        // нажимаем кнопку с выбором критерия сортировки
+        WebElement button = driver.findElement(By.cssSelector("[class*='_3DZGZdv4tl']"));
+        (new WebDriverWait(driver, 30)).until(ExpectedConditions.elementToBeClickable(button));
+        button.click();
+        // выбираем новый критерий
+        button = driver.findElement(By.xpath("//span[contains(text(), '" + criteria + "')]"));
+        (new WebDriverWait(driver, 30)).until(ExpectedConditions.elementToBeClickable(button));
+        button.click();
+    }
+
+    @Step("Check that prices are sorted in increase order")
+    public void checkPriceIncrease() {
+        // для каждого товара из списка парсим его цену и проверяем, что они расположены в порядке неубывания
+        int prevPrice = -1;
+        for (WebElement element : goodsList) {
+            int price = parser(element.findElement(By.cssSelector("[class*='grid-snippet'] [data-tid='c3eaad93']"))
+                    .getAttribute("textContent"));
+            Assert.assertTrue(price >= prevPrice);
+            prevPrice = price;
+        }
+    }
+
+    @Step("Choose the color")
+    public void changeColor(String color) {
+        // нажимаем кнопку с выбором цвета
+        WebElement button = driver.findElement(By.xpath("//span[contains(text(), '" + color + "')]/.."));
+        (new WebDriverWait(driver, 30)).until(ExpectedConditions.elementToBeClickable(button));
+        button.click();
+    }
+
+    @Step("Check that all items have this color")
+    public void сheckColor(String color) {
+        // для каждого товара из списка парсим его цвет и проверяем, что он является нужным
+        for (WebElement element : goodsList) {
+            String text = element.findElement(By.cssSelector("[class=\"_3bNl7A8hOl\"]")).getAttribute("textContent");
+            Assert.assertTrue(text.contains(color));
+        }
     }
 }

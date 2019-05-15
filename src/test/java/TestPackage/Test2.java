@@ -13,7 +13,7 @@ public class Test2 extends TestsPreparation {
     }
 
     @Test(dataProvider="SearchProvider")
-    public void test_2(String city) {
+    public void testChangeCity(String city) {
         StartPage startPage = new StartPage();
         // нажимаем кнопку с названием города
         startPage.clickButtonChangeCity();

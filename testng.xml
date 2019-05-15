@@ -15,4 +15,9 @@
             <class name="TestPackage.Test3" />
         </classes>
     </test>
+    <test name="CheckFiltersGoods">
+        <classes>
+            <class name="TestPackage.Test4" />
+        </classes>
+    </test>
 </suite>

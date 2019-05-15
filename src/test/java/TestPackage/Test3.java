@@ -6,14 +6,14 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class Test3 extends TestsPreparation {
     @Test
-    public void test3() {
+    public void testCheckOrderGoods() {
         StartPage startPage = new StartPage();
         // переходим в каталог электрических зубных щеток (через запрос в поиске)
         GoodsListPage prodPage = startPage.findItem("электрические зубные щетки");
         // указываем диапазон цен
         prodPage.inputPriceRange(999, 1999);
         // пока это возможно, нажимаем кнопку "показать еще", чтобы отобразить все щетки
-        // также формируем список всех щеток и проверяем, что в нем есть хотя бы 2 товара (чтобы взять предпоследний)
+        // также формируем список всех щеток и проверяем, что он не пуст
         prodPage.getGoodsList();
         // проверяем, что отобразились все щетки с ценами в нужном диапазоне
         prodPage.checkPriceInRange(999, 1999);

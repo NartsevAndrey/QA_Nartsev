@@ -11,7 +11,6 @@ public class AuthorizationForm extends TestsPreparation {
 
     @Step("Enter login")
     public void enterLogin(String login) {
-
         WebElement Login = (new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".passp-login-form"))))
                 .findElement(By.name("login"));

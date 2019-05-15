@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class Test1 extends TestsPreparation {
     @Test
-    public void test1() {
+    public void testAuthorization() {
         StartPage startPage = new StartPage();
         // нажимаем кнопку "Войти в аккаунт"
         AuthorizationForm authorizationForm = startPage.clickButtonLogin();
